@@ -1,1 +1,1 @@
-# pong
+Practice game #2 Pong
