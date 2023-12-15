@@ -19,28 +19,32 @@ ball = Ball((WIDTH/2, HEIGHT/2))
 paddle_right = Paddle('player', ((WIDTH - 20), (HEIGHT / 2)), 'white', ball.rect.y)
 paddle_left = Paddle('computer', (20, (HEIGHT / 2)), 'green', ball.rect.y)
 
-
 #groups
 paddle_group = pygame.sprite.Group(paddle_left, paddle_right)
 ball_group = pygame.sprite.GroupSingle(ball)
 
 #score text
-score = 0
-text_font = pygame.font.SysFont('Arial', 30, True)
-score_text = text_font.render(f'Score: {score}', True, 'white')
-text_width = score_text.get_width()
+def draw_text(text):
+  text_font = pygame.font.SysFont('Arial', 20, True)
+  
+  return text_font.render(text, True, 'white')
 
 #game loop
 while True:
   
   screen.fill((0,0,0))
-  screen.blit(score_text, (((WIDTH / 2) - (text_width / 2)), 25))
   
   paddle_group.update()
   ball_group.update()
   
   paddle_group.draw(screen)
   ball_group.draw(screen)
+  
+  computer_score_text = draw_text(f'Score: {ball.computer_score}')
+  player_score_text = draw_text(f'Score: {ball.player_score}')
+  
+  screen.blit(computer_score_text, (10, 25))
+  screen.blit(player_score_text, ((WIDTH - player_score_text.get_width()) - 10, 25))
   
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
