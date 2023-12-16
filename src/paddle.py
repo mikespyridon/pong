@@ -1,6 +1,6 @@
 import pygame
 from src.ball import Ball
-import random
+import math
 
 class Paddle(pygame.sprite.Sprite):
   def __init__(self, type, pos, fill, ball):
@@ -12,15 +12,17 @@ class Paddle(pygame.sprite.Sprite):
     self.pos = pos
     self.ball = ball
     
+    self.speed = 0
+    
     
   def get_input(self):
     keys = pygame.key.get_pressed()
     
     if self.type == 'player':
       if keys[pygame.K_UP]:
-        self.rect.y -= 5
+        self.rect.y -= 4
       elif keys[pygame.K_DOWN]:
-        self.rect.y += 5
+        self.rect.y += 4
   
   def screen_constraint(self):
     if self.rect.top <= 0:
@@ -29,9 +31,12 @@ class Paddle(pygame.sprite.Sprite):
       self.rect.bottom = 480
       
   def computer_paddle_movement(self, ball):
+    
     if self.type == 'computer':
-     if ball.rect.x <= (640/2):
-        self.rect.y = self.ball.rect.y * 0.6
+     if ball.direction['left'] and self.ball.rect.x > 0:
+        self.rect.y = self.ball.rect.y * .5
+    
+      
     
   def update(self):
     self.get_input()

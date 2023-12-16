@@ -61,15 +61,14 @@ class Ball(pygame.sprite.Sprite):
           self.direction['up'] = False
         else:
           self.direction['down'] = False
-        self.collision = False
-        
       elif self.direction['up']:
         self.direction[direction] = True
         if direction == 'up':
           self.direction['down'] = False
-      else:
-        self.direction['up'] = False
-        self.collision = False
+        else:
+          self.direction['up'] = False
+        
+      self.collision = False
         
       if self.direction['left']:
         self.direction['left'] = False
@@ -99,14 +98,14 @@ class Ball(pygame.sprite.Sprite):
     self.direction['down'] = False
   
   def reset_ball(self):
-    if self.rect.left <= -50 and not self.collision:
+    if self.rect.left <= -200 and not self.collision:
       self.player_score += 1
       self.rect.center = self.starting_pos
       self.moving = False
       self.collision = False
       self.reset_directions()
   
-    elif self.rect.right >= 700 and not self.collision:
+    elif self.rect.right >= 800 and not self.collision:
       self.computer_score += 1
       self.rect.center = self.starting_pos
       self.moving = False
