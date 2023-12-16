@@ -14,7 +14,6 @@ class Paddle(pygame.sprite.Sprite):
     
     self.speed = 0
     
-    
   def get_input(self):
     keys = pygame.key.get_pressed()
     
@@ -35,8 +34,6 @@ class Paddle(pygame.sprite.Sprite):
     if self.type == 'computer':
      if ball.direction['left'] and self.ball.rect.x > 0:
         self.rect.y = self.ball.rect.y * .5
-    
-      
     
   def update(self):
     self.get_input()
